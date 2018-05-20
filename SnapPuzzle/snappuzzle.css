@@ -18,20 +18,16 @@ max-width: 100%;
 float: left;
 }
 
-.contRofl_clr,
-.wrap {
-width: 100%;
-float: left;
-}
-
-.restartPuzzleWrap {
+.optionsPuzzleWrap {
 width: 100%;
 float: left;
 text-align: center;
 padding: 1em 0;
 }
 
-.start_puzzle, .restart_puzzle, .shuffle_puzzle {
+.start_puzzle,
+.restart_puzzle,
+.shuffle_puzzle {
   border: none;
   color: white;
   padding: 15px 32px;

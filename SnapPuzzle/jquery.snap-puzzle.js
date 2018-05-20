@@ -9,25 +9,21 @@ $(document).ready(function(){
     var $puzzleContainer_pile = $('#puzzle_Main');
     var $snappuzzlePiece = $('.snappuzzle-piece');
     var puzzle_startTime, puzzle_endTime;//make global
+    $('.shuffle_puzzle').css({"opacity": "0.6","cursor": "not-allowed"}).prop('disabled',true);
     //Start puzzle
     $('.puzzle_img').hide();
     $('.start_puzzle').on('click', function(){
       $puzzleContainer_pile.height($('.puzzle_img').height());
-      $('.start_puzzle').css({"opacity": "0.6","cursor": "not-allowed"});
-      $('.start_puzzle').prop('disabled',true);
+      $('.start_puzzle').css({"opacity": "0.6","cursor": "not-allowed"}).prop('disabled',true);
+      $('.shuffle_puzzle').css({"opacity": "1","cursor": "pointer"}).prop('disabled',false).attr('data-grid',+$(this).data("grid"));
       start_puzzle($(this).data('grid'));
-      $('.shuffle_puzzle').attr('data-grid',+$(this).data("grid"));
     });
 
     //shuffle puzzle
     $('.shuffle_puzzle').on('click', function(){
       var $grid = $(this).data('grid');
-      if ($grid) {
-        $('.puzzle_img').snapPuzzle('destroy');
-        start_puzzle($grid);
-      }else{
-        location.reload();
-      }
+      $('.puzzle_img').snapPuzzle('destroy');
+      start_puzzle($grid);
     });
     //restart puzzle
     $('.restart_puzzle').on('click', function(){
@@ -62,6 +58,7 @@ $(document).ready(function(){
                     console.log('puzzle completed!');
                     puzzle_endTime = Date.parse(new Date());
                     getKompletionTime_str(puzzle_startTime, puzzle_endTime);
+                    $('.shuffle_puzzle').css({"opacity": "0.6","cursor": "not-allowed"}).prop('disabled',true);
                 }
             });
     }
@@ -75,7 +72,7 @@ $(document).ready(function(){
                 kompletionTime_str = 'Wow! You completed the puzzle in ' + setHours_str(hours) +  setMinutes_str(minutes) + seconds + ' seconds!!!'
                 console.log(kompletionTime_str);
                 setTimeout(function(){
-                    alert(kompletionTime_str);                    
+                    alert(kompletionTime_str);
                 },999);
             //utilities
             function setHours_str(hours){return hours < 1 ? '': hours + ' hrs. ';}
